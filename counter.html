@@ -1,0 +1,127 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap" rel="stylesheet" />
+    <title>Counter</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: #f9f9f9;
+        }
+
+        .fu {
+            font-size: 50px;
+            color: #1d1d1f;
+            text-align: center;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            left: 42%;
+            background-color: transparent;
+            border: 2px solid #1d1d1f;
+            border-radius: 5px;
+            color: #1d1d1f;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            transition: .2s ease;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #1d1d1f;
+            color: #f9f9f9;
+            transition: .2s ease;
+            cursor: pointer;
+        }
+
+        .container {
+            position: relative;
+            top: 35%;
+        }
+
+    </style>
+</head>
+
+<body style="overflow-x: hidden;">
+    <div class="container" style="font-size: 30px;">
+        <h3 style="text-align: center;color: #1d1d1f;">Counter made with JavaScript</h3>
+        <p class="fu"><span id="mins">00</span>:<span id="Sec">00</span>:<span id="lilSec">00</span></p>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+    </div>
+
+    <script>
+        let mins = document.getElementById("mins");
+        let sec = document.getElementById("Sec")
+        let lilSec = document.getElementById("lilSec");
+        let startBtn = document.getElementById("start");
+        let stopBtn = document.getElementById("stop");
+        let resetBtn = document.getElementById("reset");
+        let intervel;
+        let minutes = 00;
+        let seconds = 00;
+        let milSec = 00;
+
+        startBtn.addEventListener("click", function () {
+            clearInterval(intervel);
+            intervel = setInterval(startTimer, 10);
+        });
+
+        stopBtn.addEventListener("click", function () {
+            clearInterval(intervel);
+        });
+
+        resetBtn.addEventListener("click", function () {
+            clearInterval(intervel);
+            minutes = "00";
+            seconds = "00";
+            milSec = "00";
+            mins.textContent = minutes;
+            lilSec.textContent = milSec;
+            sec.textContent = seconds;
+        });
+
+        function startTimer() {
+            milSec++;
+            if(milSec < 9) {
+                lilSec.textContent = "0" + milSec;
+            }
+
+            if(milSec > 9) {
+                lilSec.textContent = milSec;
+            }
+
+            if(milSec > 99) {
+                seconds++;
+                sec.innerHTML = "0" + seconds; 
+                milSec = 0;
+                lilSec.innerHTML = "0" + 0;
+            }
+            if (seconds >= 10) {
+                sec.innerHTML = seconds;
+            }
+            if (seconds >= 60) {
+                minutes++;
+                mins.innerHTML = "0" + minutes;
+                seconds = 0;
+                sec.innerHTML = "0" + 0;
+            }
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>
